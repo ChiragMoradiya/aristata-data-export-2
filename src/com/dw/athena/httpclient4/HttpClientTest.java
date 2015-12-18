@@ -31,6 +31,7 @@ public class HttpClientTest {
 
   public static void main(String[] args) {
     httpClient = getNTLMEnableHttpClient();
+    writeListCollection(null, "C:\\aristata-export\\master\\ListCollection.xml");
     writeListAndView(null, "UserInfo", "C:\\aristata-export\\master\\UserInfo.xml");
   }
 
@@ -54,16 +55,9 @@ public class HttpClientTest {
     return httpClient;
   }
 
-  // private static void writeListCollection(HttpClient httpClient, String location, String family)
-  // {
-  // HttpPost request = new HttpPost(getURI(family));
-  // request.setHeader("SOAPAction", getRequestHeader("GetListCollection"));
-  // request.setHeader(HttpHeaders.CONTENT_TYPE, HEADER_CONTENT_TYPE);
-  //
-  // StringEntity entity = new StringEntity(getListCollectionRequestBody(), StandardCharsets.UTF_8);
-  // request.setEntity(entity);
-  // executeRequest(request, location);
-  // }
+  private static void writeListCollection(String family, String location) {
+    executeRequest(family, "GetListCollection", "", location);
+  }
 
   private static void writeListAndView(String family, String list, String location) {
     executeRequest(family, "GetListAndView", "<listName>" + list + "</listName>", location);
