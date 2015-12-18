@@ -121,11 +121,13 @@ public class HttpClientTest {
   }
 
   private static String getListAndViewRequestBody(String listName) {
-    return "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-        + "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
-        + "<soap:Body>" + "<GetListAndView xmlns=\"http://schemas.microsoft.com/sharepoint/soap/\">"
-        + "<listName>" + listName + "</listName>" + "</GetListAndView>" + "</soap:Body>"
-        + "</soap:Envelope>";
+    return getRequestBody("GetListAndView", "<listName>" + listName + "</listName>");
+        
+//    return "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+//        + "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+//        + "<soap:Body>" + "<GetListAndView xmlns=\"http://schemas.microsoft.com/sharepoint/soap/\">"
+//        + "<listName>" + listName + "</listName>" + "</GetListAndView>" + "</soap:Body>"
+//        + "</soap:Envelope>";
   }
 
   private static String getListAndViewHeader() {
@@ -138,6 +140,14 @@ public class HttpClientTest {
         + "<soap:Body>" + " <GetListItems xmlns=\"http://schemas.microsoft.com/sharepoint/soap/\">"
         + "  <listName>" + LIST_NAME + "</listName>" + "<rowLimit>10000</rowLimit>"
         + "</GetListItems>" + "</soap:Body>" + "</soap:Envelope>";
+  }
+  
+  private static String getRequestBody(String method, String body) {
+    return "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        + "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        + "<soap:Body>" + " <" + method + " xmlns=\"http://schemas.microsoft.com/sharepoint/soap/\">"
+        + body
+        + "</" + method +  ">" + "</soap:Body>" + "</soap:Envelope>";
   }
 
   private static String getEntitiesDataRequestBody() {
