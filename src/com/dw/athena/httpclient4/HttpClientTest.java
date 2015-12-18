@@ -37,7 +37,7 @@ public class HttpClientTest {
 
   public static void main(String[] args) {
     HttpClient httpClient = getNTLMEnableHttpClient();
-    writeListAndView(httpClient, null, "Families", "C:\\aristata-export\\master\\Families.xml");
+    writeListAndView(httpClient, null, "UserInfo", "C:\\aristata-export\\master\\UserInfo.xml");
   }
 
   private static HttpClient getNTLMEnableHttpClient() {
@@ -92,6 +92,7 @@ public class HttpClientTest {
       is = httpEntity.getContent();
 
       File file = new File(fileLocation);
+      file.getParentFile().mkdirs();
       os = new FileOutputStream(file);
 
       byte[] buffer = new byte[1024];
@@ -123,7 +124,7 @@ public class HttpClientTest {
     return "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
         + "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
         + "<soap:Body>" + "<GetListAndView xmlns=\"http://schemas.microsoft.com/sharepoint/soap/\">"
-        + "<listName>" + LIST_NAME + "</listName>" + "</GetListAndView>" + "</soap:Body>"
+        + "<listName>" + listName + "</listName>" + "</GetListAndView>" + "</soap:Body>"
         + "</soap:Envelope>";
   }
 
